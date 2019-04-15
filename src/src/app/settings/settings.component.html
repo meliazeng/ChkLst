@@ -1,0 +1,81 @@
+<main role="main">
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <p>Fill in you regular tasks!</p>
+      <p-table [columns]="cols" [value]="settings" selectionMode="single" [(selection)]="selectedSetting" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th width="5%">#</th>
+            <th width="60%">Task</th>
+            <th width="20%">Expired At</th>
+            <th width="15%">Pattern</th>
+            <!--<th *ngFor="let col of columns">
+              {{col.header}}
+            </th>-->
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td>
+              {{rowData['settingId']}}
+            </td>
+            <td>
+              {{rowData['descr']}}
+            </td>
+            <td>
+              {{rowData['endDate'] | date}}
+            </td>
+            <td>
+              {{rowData['repeatDescr']}}
+            </td>
+            <!--<td *ngFor="let col of columns">
+              {{rowData[col.field]}}
+            </td>-->
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary" let-rowData>
+          <div style="text-align:left">
+            <button type="button" pButton icon="fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+          </div>
+        </ng-template>
+      </p-table>
+      <p-dialog [contentStyle]="{'overflow':'visible'}" header="Setting Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="500">
+        <div class="ui-g ui-fluid" *ngIf="setting">
+          <div class="ui-g-12">
+            <div class="ui-g-4">
+              <label for="descr">Task Description</label>
+            </div>
+            <div class="ui-g-8">
+              <input pInputText id="descr" [(ngModel)]="setting.descr" />
+            </div>
+          </div>
+          <div class="ui-g-12">
+            <div class="ui-g-4">
+              <label for="endDate">Expired At</label>
+            </div>
+            <div class="ui-g-8">
+              <p-calendar id="endDate" [(ngModel)]="setting.endDate" [showIcon]="true"></p-calendar>
+            </div>
+          </div>
+          <div class="ui-g-12">
+            <div class="ui-g-4">
+              <label for="pattern">Repeat pattern</label>
+            </div>
+            <div class="ui-g-8">
+              <p-dropdown id="pattern" [options]="patterns" [(ngModel)]="setting.repeatPatternId" placeholder="Select a Pattern" [showClear]="true"></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <p-footer>
+          <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>
+            <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+          </div>
+        </p-footer>
+      </p-dialog>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/">Close</a></p>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,98 @@
+<main role="main">
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <p>Check the tasks that done for today - {{today | date}}</p>
+      <div class="row">
+        <div class="col-md-6">
+          <p>Melia's tasks</p>
+          <p-table [value]="mtasks">
+            <ng-template pTemplate="header">
+              <tr>
+                <th width="20%">Status</th>
+                <th width="80%">Desription</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+              <tr>
+                <td pEditableColumn>
+                  <input type="checkbox" [(ngModel)]="rowData.status">
+                </td>
+                <td pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input type="text" [(ngModel)]="rowData.descr">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.descr}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="col-md-6">
+          <p>Anson's tasks</p>
+          <p-table [value]="atasks">
+            <ng-template pTemplate="header">
+              <tr>
+                <th width="20%">Status</th>
+                <th width="80%">Desription</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+              <tr>
+                <td pEditableColumn>
+                  <input type="checkbox" [(ngModel)]="rowData.status">
+                </td>
+                <td pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input type="text" [(ngModel)]="rowData.descr">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.descr}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+
+
+        <!--<div class="col-md-6">
+          <p>Melia's finished tasks</p>
+          <ol>
+            <li *ngFor="let task of mtasks1">{{task.descr}}</li>
+          </ol>
+        </div>
+        <div class="col-md-6">
+            <p>Anson's finished tasks</p>
+            <ol>
+              <li *ngFor="let task of atasks1">{{task.descr}}</li>
+            </ol>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>Melia's unfinished tasks</p>
+          <ol>
+            <li *ngFor="let task of mtasks2">{{task.descr}}</li>
+          </ol>
+        </div>
+        <div class="col-md-6">
+          <p>Anson's unfinished tasks</p>
+          <ol>
+            <li *ngFor="let task of atasks2">{{task.descr}}</li>
+          </ol>
+        </div>-->
+      </div>
+
+      <br />
+      <p><button type="button" pButton icon="fa-check" (click)="cancel()" label="Cancel"></button></p>
+</div>
+  </div>
+</main>
